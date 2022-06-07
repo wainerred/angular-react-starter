@@ -17,16 +17,21 @@ jobs:
     steps:
       - name: clone Repo
         uses: actions/checkout@v1
+        
+      - name: version node
+        run: node -v
+        
+      - name: Print application name
+        run: |
+          echo "Application name: ${{ env.APP_NAME}}"
+          echo "Deploy package name: ${{ env.PACK_NAME}}"
       
       - name: Testing 
         run: |
           cd angular 
           npm run test
         
-      - name: Print application name
-        run: |
-          echo "Application name: ${{ env.APP_NAME}}"
-          echo "Deploy package name: ${{ env.PACK_NAME}}"
+
         
      
  
