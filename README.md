@@ -1,6 +1,6 @@
 # Angular 13 & React 18 Examples Starter
 
-![example workflow](https://github.com/<OWNER>/<REPOSITORY>/actions/workflows/<Angular-CI>/badge.svg)
+![example workflow](https://github.com/github/docs/actions/workflows/ci.yml/badge.svg)
 
 
 <table>
