@@ -1,0 +1,24 @@
+
+
+name: Angular-CI
+env: 
+  APP_NAME: "myFlask"
+  PACK_NAME: "flask-deploy-ver-${{ githab.sha}}"
+  
+on:
+  push:
+    branches: "master" 
+
+  workflow_dispatch:
+
+
+jobs:
+  build: 
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Testing 
+      - run: cd angular && npm run test && npm run coverage
+
+ 
