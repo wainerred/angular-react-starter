@@ -20,6 +20,9 @@ jobs:
         
       - name: version node
         run: node -v
+
+      - name: version nginx
+        run: nginx -v
         
       - name: Print application name
         run: |
