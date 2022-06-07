@@ -9,16 +9,16 @@ on:
   push:
     branches: "master" 
 
-  workflow_dispatch:
-
 
 jobs:
   build: 
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: clone Repo
+      - uses: actions/checkout@v1
+      
       - name: Testing 
-      - run: cd angular && npm run test && npm run coverage
+      - run: cd angular-react-starter/angular && npm run test && npm run coverage
 
  
