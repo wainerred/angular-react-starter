@@ -30,7 +30,9 @@ jobs:
         run: |
           cd angular 
           npm install
+          npm outdated
           npm run test
+          npm run coverage
         
 
         
