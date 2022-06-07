@@ -1,6 +1,6 @@
 # Angular 13 & React 18 Examples Starter
-
-![example workflow](https://github.com/github/docs/actions/workflows/ci.yml/badge.svg)
+Status of Deployment:<br>
+![example workflow](https://github.com/wainerred/angular-react-starter/workflows/Angular-CI/badge.svg)
 
 
 <table>
