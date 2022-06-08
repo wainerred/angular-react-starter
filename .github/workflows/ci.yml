@@ -54,4 +54,4 @@ jobs:
           
       - name : input-push
         run: |
-          docker push ghcr.io/OWNER/angular-nginx:latest
+          docker push ghcr.io/wainerred/angular-nginx:latest
