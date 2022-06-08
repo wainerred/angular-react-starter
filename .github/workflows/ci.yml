@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v3
         
       - name: start up ci
-        run: nmp ci
+        run: npm ci
         
       - name: Print application name
         run: |
