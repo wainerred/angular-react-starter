@@ -40,3 +40,12 @@ jobs:
           cd angular 
           npm install 
           npm run build
+          
+  docker:
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - name: createDockerImage
+        run: |
+          cd angular
+          docker build -t angular-nginx .
