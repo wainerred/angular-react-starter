@@ -2,7 +2,6 @@ name: Angular-CI
 env: 
   APP_NAME: "myFlask"
   PACK_NAME: "flask-deploy-ver-${{ github.sha }}"
-  CR_PAT: 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
 on:
   push:
     branches: "master" 
@@ -55,5 +54,4 @@ jobs:
           
       - name : input-push
         run: |
-          echo ${{ env.CR_PAT }} | docker login ghcr.io -u wainerred --password-stdin
           docker push ghcr.io/OWNER/angular-nginx:latest
