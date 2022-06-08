@@ -27,7 +27,7 @@ jobs:
           cd angular 
           npm install
           npm run build
-          ng test
+          npm test
 
      
      
