@@ -3,7 +3,7 @@ env:
   APP_NAME: "myFlask"
   PACK_NAME: "flask-deploy-ver-${{ github.sha }}"
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }
+  IMAGE_NAME: "${{ github.repository }"
 on:
   push:
     branches: "master" 
