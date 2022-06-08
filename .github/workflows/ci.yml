@@ -38,4 +38,4 @@ jobs:
       - name: build
         run: |
           cd angular 
-          npm build
+          npm run build
