@@ -2,6 +2,8 @@ name: Angular-CI
 env: 
   APP_NAME: "myFlask"
   PACK_NAME: "flask-deploy-ver-${{ github.sha }}"
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }
 on:
   push:
     branches: "master" 
@@ -52,6 +54,12 @@ jobs:
           cd angular
           docker build -t angular-nginx .
           
-      - name : input-push
+      - name : logInPackage
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name : pushDockerImage
         run: |
           docker push ghcr.io/wainerred/angular-nginx:latest
