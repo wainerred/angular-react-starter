@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v3
         
         
-      - name: Print application name
+      - name: PrintAppName
         run: |
           echo "Application name: ${{ env.APP_NAME }}"
           echo "Deploy package name: ${{ env.PACK_NAME }}"
