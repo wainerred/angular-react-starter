@@ -16,8 +16,6 @@ jobs:
       - name: clone Repo
         uses: actions/checkout@v3
         
-      - name: start up ci
-        run: npm ci
         
       - name: Print application name
         run: |
@@ -29,7 +27,7 @@ jobs:
           cd angular 
           npm install
           npm run build
-          npm run test
+          ng test
 
      
      
