@@ -38,4 +38,5 @@ jobs:
       - name: build
         run: |
           cd angular 
+          npm install 
           npm run build
