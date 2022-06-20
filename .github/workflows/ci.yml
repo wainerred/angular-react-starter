@@ -1,7 +1,7 @@
 name: Angular-CI
 env: 
-  APP_NAME: "myFlask"
-  PACK_NAME: "flask-deploy-ver-${{ github.sha }}"
+  APP_NAME: "Ang-test"
+  PACK_NAME: "Ang-deploy-ver-${{ github.sha }}"
   REGISTRY: ghcr.io
   IMAGE_NAME: "${{ github.repository }}"
 on:
@@ -28,6 +28,18 @@ jobs:
           cd angular 
           npm install 
           npm run test -- --no-watch --no-progress
+          
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v3
+        with:      
+          server_address: smtp.gmail.com        
+          server_port: 465
+          subject: Github Actions job result
+          to: wainerred@gmail.com,webconsult.ekb@gmail.com
+          from: Luke Skywalker 
+          body: Build job of ${{github.repository}} completed successfully!
+          
+          
 
   build:
     runs-on: ubuntu-latest
@@ -41,6 +53,16 @@ jobs:
           cd angular 
           npm install 
           npm run build
+          
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v3
+        with:      
+          server_address: smtp.gmail.com        
+          server_port: 465
+          subject: Github Actions job result
+          to: wainerred@gmail.com,webconsult.ekb@gmail.com
+          from: Luke Skywalker 
+          body: Build job of ${{github.repository}} completed successfully!
                 
           
   build-and-push-image:
@@ -74,3 +96,17 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v3
+        with:      
+          server_address: smtp.gmail.com        
+          server_port: 465
+          subject: Github Actions job result
+          to: wainerred@gmail.com,webconsult.ekb@gmail.com
+          from: Luke Skywalker 
+          body: Build job of ${{github.repository}} completed successfully!
+          
+          
+
+
