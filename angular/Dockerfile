@@ -9,6 +9,6 @@ RUN npm run build
 #nginx
 FROM nginx:alpine
 EXPOSE 80
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /usr/src/app/dist/sample-app /usr/share/nginx/htm
+COPY --from=build /usr/src/app/dist/sample-app /usr/share/nginx/html
+COPY ./nginx.conf /etc/nginx/nginx.conf
 ENTRYPOINT ["nginx"]
