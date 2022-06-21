@@ -84,11 +84,23 @@ jobs:
   
   notification:
     runs-on: ubuntu-latest
-    needs: [build-and-push-image]
+    needs: [test]
     if: always()
     steps: 
       - uses: martialonline/workflow-status@v2
         id: check
+
+      - name: Set start timestamp
+        id: start
+        run: |
+          printf '::set-output name=timestamp::%(%s)T\n'  
+
+      - name: Calculate duration
+        run: |
+          printf -v now '%(%s)T'
+          duration=$((now - ${{ steps.start.outputs.timestamp }}))
+          # Do something with duration, set as output to then use in Slack message
+          # or similar    
 
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
@@ -100,12 +112,5 @@ jobs:
           subject: Github Actions job result
           to: wainerred@gmail.com
           from: wainer_actions
-          body: Build job of ${{github.repository}} completed - ${{ steps.check.outputs.status }}! Lead time -  long.
-          
-      - name: Workflow Duration Action
-        uses: channyein87/workflow-duration-action@v1.16
-        id: duration
-        
-      - name: Get the output of duration
-        run: echo "The duration is ${{ steps.duration.outputs.duration }} seconds long."
+          body: Build job of ${{github.repository}} completed - ${{ steps.check.outputs.status }}! Lead time - ${{duration}} second long.
           
