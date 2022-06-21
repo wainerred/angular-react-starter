@@ -91,14 +91,7 @@ jobs:
       - uses: martialonline/workflow-status@v2
         id: check
 
-      - name: duration
-        uses: channyein87/workflow-duration-action@v1
-        id: duration
-        with:
-          repository: ${{ github.event.workflow_run.head_repository.full_name }}
-          run_id: ${{ github.event.workflow_run.id }}
-          
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+
 
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
