@@ -28,6 +28,12 @@ jobs:
           cd angular 
           npm install 
           npm run test -- --no-watch --no-progress
+
+      - name: Workflow run duration action
+        uses: channyein87/workflow-duration-action@v1
+        id: duration
+      - name: Get the output of duration
+        run: echo "The units-test workflow is ${{ steps.duration.outputs.duration }} seconds long."
           
 
           
@@ -91,8 +97,6 @@ jobs:
       - uses: martialonline/workflow-status@v2
         id: check
         
-      - uses: channyein87/workflow-duration-action@v1.16
-        id: duration
 
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
