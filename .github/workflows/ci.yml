@@ -7,9 +7,6 @@ env:
 on:
   push:
     branches: "master" 
-  workflow_run:
-    types: [ "completed" ]
-    workflows: [ "units-test" ]
 
 
 jobs:
@@ -31,6 +28,8 @@ jobs:
           cd angular 
           npm install 
           npm run test -- --no-watch --no-progress
+          
+          
 
   build:
     runs-on: ubuntu-latest
@@ -78,6 +77,25 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           
+  
+  workflow_durations:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test workflow duration
+        uses: channyein87/workflow-duration-action@v1
+        id: test
+        with:
+          repository: actions/checkout
+          workflow: ci.yml
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check dist workflow duration
+        uses: channyein87/workflow-duration-action@v1
+        id: check-dist
+        
+      - name: Get the output of duration
+        run: |
+          echo "The test workflow is ${{ steps.test.outputs.duration }} long."
+         
   
   
 
