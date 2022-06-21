@@ -91,7 +91,7 @@ jobs:
       - uses: martialonline/workflow-status@v2
         id: check
         
-      - uses: channyein87/workflow-duration-action@v2
+      - uses: channyein87/workflow-duration-action@v1.16
         id: duration
 
       - name: Send mail
