@@ -12,8 +12,14 @@ on:
 jobs:
   test: 
     runs-on: ubuntu-latest
+    
 
     steps:
+      - name: Set start timestamp
+        id: start
+        run: |
+          printf '::set-output name=timestamp::%(%s)T\n'  
+          
       - name: clone Repo
         uses: actions/checkout@v3
         
@@ -90,17 +96,11 @@ jobs:
       - uses: martialonline/workflow-status@v2
         id: check
 
-      - name: Set start timestamp
-        id: start
-        run: |
-          printf '::set-output name=timestamp::%(%s)T\n'  
-
       - name: Calculate duration
         run: |
           printf -v now '%(%s)T'
-          duration=$((now - ${{ steps.start.outputs.timestamp }}))
-          # Do something with duration, set as output to then use in Slack message
-          # or similar    
+          duration = $((now - ${{ steps.start.outputs.timestamp }}))
+   
 
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
