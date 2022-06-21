@@ -91,8 +91,8 @@ jobs:
       - uses: martialonline/workflow-status@v2
         id: check
 
-      - name: Workflow run duration action
-        uses: channyein87/workflow-duration-action@v1
+    
+      - uses: channyein87/workflow-duration-action@v1
         id: duration
 
       - name: Send mail
@@ -105,7 +105,7 @@ jobs:
           subject: Github Actions job result
           to: wainerred@gmail.com,webconsult.ekb@gmail.com
           from: Luke Skywalker 
-          body: Build job of ${{github.repository}} completed - ${{ steps.check.outputs.status }}! Lead time - ${{ steps.duration.outputs.duration }} seconds long.
+          body: Build job of ${{github.repository}} completed - ${{ steps.check.outputs.status }}! Lead time - ${{ steps.duration.outputs.duration }} long.
           
           
 
