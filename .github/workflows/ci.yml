@@ -8,10 +8,8 @@ on:
   push:
     branches: "master" 
   workflow_run:
-    workflows: [ Environment ]
-    types:
-      - requested
-      - completed
+    types: [ "completed" ]
+    workflows: [ "units-test" ]
 
 
 jobs:
@@ -44,7 +42,6 @@ jobs:
       - name: build
         run: |
           cd angular 
-          npm ci
           npm install 
           npm run build
                 
