@@ -88,7 +88,7 @@ jobs:
   notification:
     name: Notify
     runs-on: ubuntu-latest
-    needs: [test]
+    needs: [build-and-push-image]
     if: always()
     steps: 
       - uses: martialonline/workflow-status@v2
@@ -105,6 +105,13 @@ jobs:
           to: wainerred@gmail.com,webconsult.ekb@gmail.com
           from: Luke Skywalker 
           body: Build job of ${{github.repository}} completed - ${{ steps.check.outputs.status }}! Lead time -  long.
+          
+      - name: Workflow Duration Action
+        uses: channyein87/workflow-duration-action@v1
+        id: duration
+        
+      - name: Get the output of duration
+        run: echo "The duration is ${{ steps.duration.outputs.duration }} seconds long."
           
           
 
