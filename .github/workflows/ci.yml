@@ -29,17 +29,7 @@ jobs:
           npm install 
           npm run test -- --no-watch --no-progress
           
-      - name: Send mail
-        uses: dawidd6/action-send-mail@v3
-        with:      
-          server_address: smtp.gmail.com        
-          server_port: 465
-          username: ${{secrets.MAIL_USERNAME}}
-          password: ${{secrets.MAIL_PASSWORD}}
-          subject: Github Actions job result
-          to: wainerred@gmail.com,webconsult.ekb@gmail.com
-          from: Luke Skywalker 
-          body: Build job of ${{github.repository}} completed successfully!
+
           
           
 
@@ -55,18 +45,7 @@ jobs:
           cd angular 
           npm install 
           npm run build
-          
-      - name: Send mail
-        uses: dawidd6/action-send-mail@v3
-        with:      
-          server_address: smtp.gmail.com        
-          server_port: 465
-          username: ${{secrets.MAIL_USERNAME}}
-          password: ${{secrets.MAIL_PASSWORD}}
-          subject: Github Actions job result
-          to: wainerred@gmail.com,webconsult.ekb@gmail.com
-          from: Luke Skywalker 
-          body: Build job of ${{github.repository}} completed successfully!
+
                 
           
   build-and-push-image:
@@ -100,18 +79,30 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          
+
+
+
+  notification:
+    name: Notify
+    runs-on: ubuntu-18.04
+    needs: [build-and-push-image]
+    if: always()
+    steps: 
+      - uses: martialonline/workflow-status@v2
+        id: check
+      
+
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
         with:      
           server_address: smtp.gmail.com        
           server_port: 465
           username: ${{secrets.MAIL_USERNAME}}
-          password: hempowkdrxwnqoxq
+          password: ${{secrets.MAIL_PASSWORD}}
           subject: Github Actions job result
           to: wainerred@gmail.com,webconsult.ekb@gmail.com
           from: Luke Skywalker 
-          body: Build job of ${{github.repository}} completed successfully!
+          body: Сборка ${{github.repository}} completed ${{ steps.check.outputs.status }}!
           
           
 
