@@ -92,17 +92,6 @@ jobs:
       - uses: martialonline/workflow-status@v2
         id: check
 
-      - name: Get current time
-        uses: gerred/actions/current-time@master
-        id: current-time
-        
-      - name: Use current time
-        env:
-          TIME: "${{ steps.current-time.outputs.time }}"
-        run: echo $TIME
-
-        
-
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
         with:      
@@ -113,7 +102,7 @@ jobs:
           subject: Github Actions job result
           to: wainerred@gmail.com,webconsult.ekb@gmail.com
           from: Luke Skywalker 
-          body: Build job of ${{github.repository}} completed - ${{ steps.check.outputs.status }}! Lead time - $TIME  long.
+          body: Build job of ${{github.repository}} completed - ${{ steps.check.outputs.status }}! Lead time -  long.
           
           
 
