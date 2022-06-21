@@ -99,7 +99,7 @@ jobs:
       - name: Calculate duration
         run: |
           printf -v now '%(%s)T'
-          duration=$((now-${{ steps.start.outputs.timestamp }}))
+          duration = ${{now-${{ steps.start.outputs.timestamp }}}}
           
       - name: PrintTime
         run: |
