@@ -99,7 +99,7 @@ jobs:
       - name: Calculate duration
         run: |
           printf -v now '%(%s)T'
-          duration = $((now - ${{ steps.start.outputs.timestamp }}))
+          duration=$((now - ${{ steps.start.outputs.timestamp }}))
    
 
       - name: Send mail
@@ -112,5 +112,5 @@ jobs:
           subject: Github Actions job result
           to: wainerred@gmail.com
           from: wainer_actions
-          body: Build job of ${{github.repository}} completed - ${{ steps.check.outputs.status }}! Lead time - ${{duration}} second long.
+          body: Build job of ${{github.repository}} completed - ${{ steps.check.outputs.status }}! Lead time - duration second long.
           
