@@ -98,7 +98,7 @@ jobs:
           body: Build job of ${{github.repository}} completed - ${{ steps.check.outputs.status }}! Lead time -  long.
           
       - name: Workflow Duration Action
-        uses: channyein87/workflow-duration-action@v1
+        uses: channyein87/workflow-duration-action@v1.16
         id: duration
         
       - name: Get the output of duration
