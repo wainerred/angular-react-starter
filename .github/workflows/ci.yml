@@ -95,7 +95,9 @@ jobs:
         uses: channyein87/workflow-duration-action@v1
         id: duration
         with:
-          repository: ${{github.repository}}
+          repository: ${{ github.event.workflow_run.head_repository.full_name }}
+          run_id: ${{ github.event.workflow_run.id }}
+          
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Send mail
