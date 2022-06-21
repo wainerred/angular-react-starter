@@ -1,7 +1,7 @@
 name: Angular-CI
 env: 
-  APP_NAME: "Ang-test"
-  PACK_NAME: "Ang-deploy-ver-${{ github.sha }}"
+  APP_NAME: "myFlask"
+  PACK_NAME: "flask-deploy-ver-${{ github.sha }}"
   REGISTRY: ghcr.io
   IMAGE_NAME: "${{ github.repository }}"
 on:
@@ -28,11 +28,6 @@ jobs:
           cd angular 
           npm install 
           npm run test -- --no-watch --no-progress
-          
-          
-
-          
-          
 
   build:
     runs-on: ubuntu-latest
@@ -43,12 +38,9 @@ jobs:
 
       - name: build
         run: |
-          
           cd angular 
           npm install 
-          npm ci
           npm run build
-
                 
           
   build-and-push-image:
@@ -82,37 +74,3 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-
-
-  notification:
-    name: Notify
-    runs-on: ubuntu-latest
-    needs: [build-and-push-image]
-    if: always()
-    steps: 
-      - uses: martialonline/workflow-status@v2
-        id: check
-
-      - name: Send mail
-        uses: dawidd6/action-send-mail@v3
-        with:      
-          server_address: smtp.gmail.com        
-          server_port: 465
-          username: ${{secrets.MAIL_USERNAME}}
-          password: ${{secrets.MAIL_PASSWORD}}
-          subject: Github Actions job result
-          to: wainerred@gmail.com,webconsult.ekb@gmail.com
-          from: Luke Skywalker 
-          body: Build job of ${{github.repository}} completed - ${{ steps.check.outputs.status }}! Lead time -  long.
-          
-      - name: Workflow Duration Action
-        uses: channyein87/workflow-duration-action@v1
-        id: duration
-        
-      - name: Get the output of duration
-        run: echo "The duration is ${{ steps.duration.outputs.duration }} seconds long."
-          
-          
-
-
