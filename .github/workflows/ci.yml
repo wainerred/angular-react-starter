@@ -63,7 +63,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: Wainerred!#13
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Meta
         id: meta
