@@ -97,8 +97,10 @@ jobs:
         id: check
 
       - name: testTime
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-
+          gh auth login
           gh api \ 
             -H "Accept: application/vnd.github.v3+json" \
             /repos/OWNER/REPO/actions/runs
