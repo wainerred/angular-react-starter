@@ -78,19 +78,11 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          
-  
-
-  
-  notification:
+     
+     
+  workflow_duration:
     runs-on: ubuntu-latest
-    needs: [build-and-push-image]
-    if: always()
-    steps: 
-      - name: checkStatus
-        uses: martialonline/workflow-status@v2
-        id: check
-
+    steps:
       - name: Test workflow duration
         uses: channyein87/workflow-duration-action@v1.16
         id: test
@@ -105,6 +97,17 @@ jobs:
           echo "The test workflow is ${{ steps.test.outputs.milliseconds }} long."
           echo "The test workflow is ${{ steps.test.outputs.seconds }} long."
           echo "The test workflow is ${{ steps.test.outputs.duration }} long."
+  
+  notification:
+    runs-on: ubuntu-latest
+    needs: [build-and-push-image]
+    if: always()
+    steps: 
+      - name: checkStatus
+        uses: martialonline/workflow-status@v2
+        id: check
+
+
           
 
 
