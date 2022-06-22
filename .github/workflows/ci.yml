@@ -96,7 +96,7 @@ jobs:
         id: test
         with:
           repository: ${{ env.IMAGE_NAME }}
-          run_id: ${{ github.event.workflow_run.id }}
+          run_id: ${{ github.event.run.id }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get the output of duration
