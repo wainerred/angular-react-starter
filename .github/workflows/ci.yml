@@ -82,6 +82,7 @@ jobs:
      
   workflow_duration:
     runs-on: ubuntu-latest
+    needs: [build-and-push-image]
     steps:
       - name: Test workflow duration
         uses: channyein87/workflow-duration-action@v1.16
@@ -100,7 +101,7 @@ jobs:
   
   notification:
     runs-on: ubuntu-latest
-    needs: [build-and-push-image]
+    needs: [workflow_duration]
     if: always()
     steps: 
       - name: checkStatus
