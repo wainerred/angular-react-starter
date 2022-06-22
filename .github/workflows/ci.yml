@@ -95,13 +95,16 @@ jobs:
         uses: channyein87/workflow-duration-action@v1.16
         id: test
         with:
-          repository: ${{ env.IMAGE_NAME }}
+          repository: ${{ github.repository }}
           run_id: ${{ github.run_id }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get the output of duration
         run: |
+          echo "The test workflow is ${{ steps.test.outputs.milliseconds }} long."
+          echo "The test workflow is ${{ steps.test.outputs.seconds }} long."
           echo "The test workflow is ${{ steps.test.outputs.duration }} long."
+          
 
 
       - name: Send mail
