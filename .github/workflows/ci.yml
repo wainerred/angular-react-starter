@@ -87,8 +87,8 @@ jobs:
         uses: channyein87/workflow-duration-action@v1
         id: test
         with:
-          repository: actions/checkout
-          workflow: ci.yml
+          repository: ${{ env.IMAGE_NAME }}
+          run_id: '${{ github.event.workflow_run.id }'
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get the output of duration
@@ -117,5 +117,5 @@ jobs:
           subject: Github Actions job result
           to: wainerred@gmail.com
           from: wainer_actions
-          body: Build job of ${{github.repository}} completed - ${{ steps.check.outputs.status }}! Lead time -  second long.
+          body: Build job of ${{github.repository}} completed - ${{ steps.check.outputs.status }}! Lead time - ${{ steps.test.outputs.duration }} second long.
           
