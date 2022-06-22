@@ -15,10 +15,6 @@ jobs:
     
 
     steps:
-      #- name: Set start timestamp
-      #  id: start
-      #  run: |
-      #   printf '::set-output name=timestamp::%(%s)T\n'  
           
       - name: clone Repo
         uses: actions/checkout@v3
@@ -84,7 +80,21 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           
          
-  
+  workflow_durations:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test workflow duration
+        uses: channyein87/workflow-duration-action@v1
+        id: test
+        with:
+          repository: actions/checkout
+          workflow: ci.yml
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get the output of duration
+        run: |
+          echo "The test workflow is ${{ steps.test.outputs.duration }} long."
+
   
 
   
@@ -96,23 +106,6 @@ jobs:
       - uses: martialonline/workflow-status@v2
         id: check
 
-      - name: testTime
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh auth login
-          gh api \ 
-            -H "Accept: application/vnd.github.v3+json" \
-            /repos/OWNER/REPO/actions/runs
-          
-      - name: printTestTime
-    
-        run: echo "created_at"
-        
-      - name: PrintTime
-        run: |
-          echo "duration"
-   
 
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
