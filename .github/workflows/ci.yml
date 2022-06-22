@@ -98,7 +98,7 @@ jobs:
 
       - name: testTime
         run: |
-          gh auth login
+
           gh api \ 
             -H "Accept: application/vnd.github.v3+json" \
             /repos/OWNER/REPO/actions/runs
