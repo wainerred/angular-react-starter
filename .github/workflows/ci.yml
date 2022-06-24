@@ -122,5 +122,5 @@ jobs:
           subject: Github Actions job result
           to: wainerred@gmail.com
           from: wainer_actions
-          body: Build job of ${{github.repository}} completed - ${{ steps.check.outputs.status }}! Lead time - ${{ steps.test.outputs.duration }} second long.
+          body: Build job of ${{github.repository}} completed - ${{ steps.check.outputs.status }}! Lead time - ${{ steps.test.outputs.seconds }} second long.
           
