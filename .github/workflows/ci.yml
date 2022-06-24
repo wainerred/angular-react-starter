@@ -91,7 +91,7 @@ jobs:
           https://api.github.com/repos/${{ env.IMAGE_NAME }}/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }}
           
       - name: start_time
-        run: echo "check_time.created_at"
+        run: echo ${{ check_time.created_at }}
           
 
   notification:
