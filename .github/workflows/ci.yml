@@ -35,6 +35,7 @@ jobs:
           
 
   build:
+    runs-on: ubuntu-latest
     needs: [test]
     steps:
       - name: clone Repo
@@ -48,6 +49,7 @@ jobs:
                
           
   build-and-push-image:
+    runs-on: ubuntu-latest
     needs: [build]
     permissions:
       contents: read
@@ -78,8 +80,20 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           
-  
+  timer:
+    runs-on: ubuntu-latest
+    if: always()
+    steps: 
+      - name: check_time
+        run: |
+           curl \
+             -H "Accept: application/vnd.github.v3+json" \ 
+             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}'" \
+              https://api.github.com/repos/wainerred/angular-react-starter/actions/runs  
+              echo "time on ${{ created_at.status }}" 
+
   notification:
+    runs-on: ubuntu-latest
     needs: [build-and-push-image]
     if: always()
     steps: 
