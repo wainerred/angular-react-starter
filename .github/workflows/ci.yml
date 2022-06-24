@@ -88,10 +88,10 @@ jobs:
         run: |
           curl \
           -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/${{ env.IMAGE_NAME }}/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }}
+          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }}
           
       - name: start_time
-        run: echo ${{ check_time.created_at }}
+        run: echo .created_at
           
 
   notification:
