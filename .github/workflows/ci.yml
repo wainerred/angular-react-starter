@@ -47,9 +47,12 @@ jobs:
           npm run build
 
       - name: duration_build_test
-      
         uses: channyein87/workflow-duration-action@v1
         id: duration_build
+        with:
+          repository: ${{ github.repository }}
+          run_id: ${{ github.run_id }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Get the output of duration
         run: echo "The duration is ${{ steps.duration_build.outputs.duration }} seconds long."
