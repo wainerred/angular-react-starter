@@ -88,8 +88,8 @@ jobs:
         run: |
            curl \
              -H "Accept: application/vnd.github.v3+json" \ 
-             -H "Authorization:${{ secrets.GITHUB_TOKEN }}'" \ https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }}
-              echo "time on created_at" 
+             -H "Authorization:${{ secrets.GITHUB_TOKEN }}'" \ 
+             https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }}
 
   notification:
     runs-on: ubuntu-latest
