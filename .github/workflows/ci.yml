@@ -33,8 +33,8 @@ jobs:
           npm run test -- --no-watch --no-progress
           
           
+
   build:
-    runs-on: ubuntu-latest
     needs: [test]
     steps:
       - name: clone Repo
@@ -45,21 +45,9 @@ jobs:
           cd angular 
           npm install 
           npm run build
-
-      - name: duration_build_test
-        uses: channyein87/workflow-duration-action@v1
-        id: duration_build
-        with:
-          repository: ${{ github.repository }}
-          run_id: ${{ github.run_id }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-        
-      - name: Get the output of duration
-        run: echo "The duration is ${{ steps.duration_build.outputs.duration }} seconds long."
-                
+               
           
   build-and-push-image:
-    runs-on: ubuntu-latest
     needs: [build]
     permissions:
       contents: read
@@ -89,35 +77,15 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-     
-     
-
+          
   
   notification:
-    runs-on: ubuntu-latest
     needs: [build-and-push-image]
     if: always()
     steps: 
       - name: checkStatus
         uses: martialonline/workflow-status@v2
         id: check
-
-      - name: Test workflow duration
-        uses: channyein87/workflow-duration-action@v1.16
-        id: duration
-        with:
-          repository: ${{ github.repository }}
-          run_id: ${{ github.run_id }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Get the output of duration
-        run: |
-          echo "The test workflow is ${{ steps.duration.outputs.milliseconds }} long."
-          echo "The test workflow is ${{ steps.duration.outputs.seconds }} long."
-          echo "The test workflow is ${{ steps.duration.outputs.duration }} long."
-
-          
-
 
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
@@ -129,5 +97,5 @@ jobs:
           subject: Github Actions job result
           to: wainerred@gmail.com
           from: wainer_actions
-          body: Build job of ${{github.repository}} completed - ${{ steps.check.outputs.status }}! Lead time - ${{ steps.duration.outputs.milliseconds }} second long.
+          body: Build job of ${{github.repository}} completed - ${{ steps.check.outputs.status }}! Lead time -  second long.
           
