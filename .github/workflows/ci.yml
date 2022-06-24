@@ -33,7 +33,6 @@ jobs:
           npm run test -- --no-watch --no-progress
           
           
-
   build:
     runs-on: ubuntu-latest
     needs: [test]
@@ -46,6 +45,14 @@ jobs:
           cd angular 
           npm install 
           npm run build
+
+      - name: duration_build_test
+      
+        uses: channyein87/workflow-duration-action@v1
+        id: duration_build
+        
+      - name: Get the output of duration
+        run: echo "The duration is ${{ steps.duration_build.outputs.duration }} seconds long."
                 
           
   build-and-push-image:
@@ -85,8 +92,8 @@ jobs:
   
   notification:
     runs-on: ubuntu-latest
-    #needs: [build-and-push-image]
-    #if: always()
+    needs: [build-and-push-image]
+    if: always()
     steps: 
       - name: checkStatus
         uses: martialonline/workflow-status@v2
