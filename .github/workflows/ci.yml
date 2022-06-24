@@ -97,11 +97,7 @@ jobs:
       - name: Test workflow duration
         uses: channyein87/workflow-duration-action@v1.16
         id: test
-        with:
-          repository: ${{ github.repository }}
-          run_id: ${{ github.run_id }}
-          workflow: ci.yml
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+
 
       - name: Get the output of duration
         run: |
