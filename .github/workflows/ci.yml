@@ -86,7 +86,10 @@ jobs:
     steps: 
       - name: check_time
         run: |
-           curl \ -H "Accept: application/vnd.github.v3+json" \ -H "Authorization:${{ secrets.GITHUB_TOKEN }}'" \ https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }}
+           curl \ 
+           -H "Accept: application/vnd.github.v3+json" \ 
+           #-H "Authorization: ${{ secrets.GITHUB_TOKEN }}'" \ 
+           https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }}
 
   notification:
     runs-on: ubuntu-latest
