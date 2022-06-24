@@ -88,8 +88,8 @@ jobs:
         run: |
            curl \
              -H "Accept: application/vnd.github.v3+json" \ 
-             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}'" \
-              https://api.github.com/repos/wainerred/angular-react-starter/actions/runs  
+             -H "Authorization:${{ secrets.GITHUB_TOKEN }}'" \
+              https://api.github.com/repos/wainerred/angular-react-starter/actions/runs/${{ github.run_id }} 
               echo "time on created_at" 
 
   notification:
