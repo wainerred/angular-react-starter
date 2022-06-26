@@ -5,6 +5,7 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: "${{ github.repository }}"
   JOB_START: $(curl https://api.github.com/repos/wainerred/angular-react-starter/actions/runs/2555356216 | jq ".created_at")
+  JOB_END: $(curl https://api.github.com/repos/wainerred/angular-react-starter/actions/runs/2555356216 | jq ".updated_at")
 on:
   push:
     branches: "master" 
@@ -19,11 +20,7 @@ jobs:
 
     steps:
       
-      - name: check_time_start
-        run: |
-          echo "JOB_START=$(curl \
-          -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".created_at")" >> $GITHUB_ENV
+
       
       - name: clone Repo
         uses: actions/checkout@v3
@@ -88,11 +85,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
       
-      - name: check_time_end
-        run: |
-          echo "JOB_END=$(curl \
-          -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".updated_at")"
+
 
 
 
@@ -109,8 +102,8 @@ jobs:
         
       - name: print_time
         run: |
-          echo JOB_END 
           echo "Время начало: ${{ env.JOB_START}}"
+          echo "Время конца: ${{ env.JOB_END}}"
 
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
