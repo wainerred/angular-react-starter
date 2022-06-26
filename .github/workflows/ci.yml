@@ -4,7 +4,6 @@ env:
   PACK_NAME: "Ang-deploy-ver-${{ github.sha }}"
   REGISTRY: ghcr.io
   IMAGE_NAME: "${{ github.repository }}"
-  RUNTIME: ${{ env.JOB_END }} - ${{ env.JOB_START }}
 on:
   push:
     branches: "master" 
@@ -96,8 +95,11 @@ jobs:
           -H "Accept: application/vnd.github.v3+json" \
           https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".updated_at")" >> GITHUB_ENV
           
+      - name: time
+        run: "JOB_TIME=${{ env.JOB_END }} - ${{ env.JOB_START }}"
+          
       - name: print_time
-        run: echo $RUNTIME
+        run: echo $JOB_TIME
 
           
 
