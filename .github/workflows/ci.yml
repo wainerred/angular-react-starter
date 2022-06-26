@@ -92,7 +92,7 @@ jobs:
         id: start_time
           
       - name: start_time1
-        run: echo ${{ start_time }}
+        run: echo ${{ steps.start_time }}
           
 
   notification:
