@@ -22,7 +22,7 @@ jobs:
         run: |
           echo "JOB_START=$(curl \
           -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }})" >> $GITHUB_ENV
+          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".created_at")" >> $GITHUB_ENV
       
       - name: clone Repo
         uses: actions/checkout@v3
@@ -109,7 +109,7 @@ jobs:
       - name: print_time
         run: |
           echo JOB_END 
-          echo ${{ env.JOB_START.created_at }}
+          echo ${{ env.JOB_START}}
 
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
