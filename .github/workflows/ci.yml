@@ -4,6 +4,7 @@ env:
   PACK_NAME: "Ang-deploy-ver-${{ github.sha }}"
   REGISTRY: ghcr.io
   IMAGE_NAME: "${{ github.repository }}"
+  JOB_START: ""
 on:
   push:
     branches: "master" 
