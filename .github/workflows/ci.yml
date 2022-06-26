@@ -1,4 +1,4 @@
-name: Angular-CI
+12Йname: Angular-CI
 env: 
   APP_NAME: "Ang-test"
   PACK_NAME: "Ang-deploy-ver-${{ github.sha }}"
@@ -84,14 +84,14 @@ jobs:
     runs-on: ubuntu-latest
     if: always()
     steps: 
-      - name: check_time
+      - name: check_time_start
         run: |
-          curl \
+          start_time = curl \
           -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }}
+          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".created_at"
           
       - name: start_time
-        run: echo .created_at
+        run: echo $start_time
           
 
   notification:
