@@ -91,12 +91,13 @@ jobs:
           -H "Accept: application/vnd.github.v3+json" \
           https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".created_at")" >> GITHUB_ENV
 
-        run: |
+
           echo "JOB_END=$(curl \
           -H "Accept: application/vnd.github.v3+json" \
           https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".updated_at")" >> GITHUB_ENV
-        
-        run: $RUNTIME
+          
+      - name: print_time
+        run: echo $RUNTIME
 
           
 
