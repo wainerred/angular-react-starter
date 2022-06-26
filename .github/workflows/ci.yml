@@ -96,7 +96,7 @@ jobs:
           https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".updated_at")"
           
       - name: time
-        run: "JOB_TIME=${{ env.JOB_END }} - ${{ env.JOB_START }}"
+        run: "JOB_TIME=${{ JOB_END }} - ${{ JOB_START }}"
           
       - name: print_time
         run: echo $JOB_TIME
