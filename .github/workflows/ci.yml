@@ -22,7 +22,7 @@ jobs:
         run: |
           echo "JOB_START=$(curl \
           -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }})" >> GITHUB_ENV
+          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }})" >> $GITHUB_ENV
       
       - name: clone Repo
         uses: actions/checkout@v3
