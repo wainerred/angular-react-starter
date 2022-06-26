@@ -1,4 +1,4 @@
-12Йname: Angular-CI
+name: Angular-CI
 env: 
   APP_NAME: "Ang-test"
   PACK_NAME: "Ang-deploy-ver-${{ github.sha }}"
