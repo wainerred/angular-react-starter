@@ -104,7 +104,7 @@ jobs:
         run: |
           echo "Время начало: ${{ env.JOB_START}}"
           echo "Время конца: ${{ env.JOB_END}}"
-          echo "Время: (${{ env.JOB_END}} - ${{ env.JOB_START}})"
+          echo "Время: ((${{ env.JOB_END}} +%s) - (${{ env.JOB_START}} +%s))"
 
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
