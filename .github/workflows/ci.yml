@@ -4,8 +4,6 @@ env:
   PACK_NAME: "Ang-deploy-ver-${{ github.sha }}"
   REGISTRY: ghcr.io
   IMAGE_NAME: "${{ github.repository }}"
-  JOB_START: $(curl \ -H https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".created_at")
-  JOB_END: $(curl \ -H https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".updated_at")
 on:
   push:
     branches: "master" 
@@ -24,7 +22,7 @@ jobs:
         run: |
           echo "JOB_START=$(curl \
           -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".created_at")" >> $GITHUB_env
+          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }})" >> GITHUB_ENV
       
       - name: clone Repo
         uses: actions/checkout@v3
@@ -93,7 +91,7 @@ jobs:
         run: |
           echo "JOB_END=$(curl \
           -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".updated_at")" >> $GITHUB_env
+          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".updated_at")"
 
 
 
@@ -110,8 +108,8 @@ jobs:
         
       - name: print_time
         run: |
-          echo ${{ env.JOB_END }}
-          echo ${{ env.JOB_START }}
+          echo JOB_END 
+          echo ${{ env.JOB_START.created_at }}
 
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
@@ -123,5 +121,5 @@ jobs:
           subject: Github Actions job result
           to: wainerred@gmail.com
           from: wainer_actions
-          body: Build job of ${{github.repository}} completed - ${{ steps.check.outputs.status }}! Lead time -  second long.
+          body: Build job of ${{ env.IMAGE_NAME }} completed - ${{ steps.check.outputs.status }}! Lead time -  second long.
           
