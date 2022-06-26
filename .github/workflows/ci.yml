@@ -4,6 +4,7 @@ env:
   PACK_NAME: "Ang-deploy-ver-${{ github.sha }}"
   REGISTRY: ghcr.io
   IMAGE_NAME: "${{ github.repository }}"
+  RUNTIME: ${{ env.JOB_END }} - ${{ env.JOB_START }}
 on:
   push:
     branches: "master" 
@@ -84,15 +85,19 @@ jobs:
     runs-on: ubuntu-latest
     if: always()
     steps: 
-      - name: check_time_start
+      - name: check_time
         run: |
-          curl \
+          echo "JOB_START=$(curl \
           -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".created_at"
-        id: start_time
-          
-      - name: start_time1
-        run: echo ${{ steps.start_time.outputs.status }}
+          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".created_at")" >> GITHUB_ENV
+
+        run: |
+          echo "JOB_END=$(curl \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".updated_at")" >> GITHUB_ENV
+        
+        run: $RUNTIME
+
           
 
   notification:
