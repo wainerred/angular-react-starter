@@ -109,7 +109,7 @@ jobs:
       - name: print_time
         run: |
           echo JOB_END 
-          echo ${{ env.JOB_START}}
+          echo "Время начало: ${{ env.JOB_START}}"
 
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
