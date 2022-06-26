@@ -13,10 +13,17 @@ on:
 jobs:
   test: 
     runs-on: ubuntu-latest
-    
+
+
 
     steps:
-          
+      
+      - name: check_time_start
+        run: |
+          echo "JOB_START=$(curl \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".created_at")" >> GITHUB_ENV
+      
       - name: clone Repo
         uses: actions/checkout@v3
         
@@ -79,25 +86,14 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          
-  timer:
-    runs-on: ubuntu-latest
-    if: always()
-    steps: 
-      - name: check_time
+      
+      - name: check_time_end
         run: |
-          echo "JOB_START=$(curl \
-          -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".created_at")"
-
-
           echo "JOB_END=$(curl \
           -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".updated_at")"
+          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".updated_at")" >> GITHUB_ENV
 
-          
-      - name: print_time
-        run: echo $JOB_END
+
 
           
 
@@ -109,6 +105,11 @@ jobs:
       - name: checkStatus
         uses: martialonline/workflow-status@v2
         id: check
+        
+      - name: print_time
+        run: |
+          echo ${{ env.JOB_END }}
+          echo ${{ env.JOB_START }}
 
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
