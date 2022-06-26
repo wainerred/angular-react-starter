@@ -22,7 +22,7 @@ jobs:
         run: |
           echo "JOB_START=$(curl \
           -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".created_at")" >> $GITHUB_ENV
+          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".created_at")" >> $GITHUB_env
       
       - name: clone Repo
         uses: actions/checkout@v3
@@ -91,7 +91,7 @@ jobs:
         run: |
           echo "JOB_END=$(curl \
           -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".updated_at")" >> $GITHUB_ENV
+          https://api.github.com/repos/${{ env.IMAGE_NAME }}/actions/runs/${{ github.run_id }} | jq ".updated_at")" >> $GITHUB_env
 
 
 
