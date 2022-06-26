@@ -4,7 +4,7 @@ env:
   PACK_NAME: "Ang-deploy-ver-${{ github.sha }}"
   REGISTRY: ghcr.io
   IMAGE_NAME: "${{ github.repository }}"
-  JOB_START: ""
+  JOB_START: $(curl https://api.github.com/repos/wainerred/angular-react-starter/actions/runs/2555356216 | jq ".created_at")
 on:
   push:
     branches: "master" 
