@@ -102,8 +102,8 @@ jobs:
         
       - name: print_time
         run: |
-          echo START= $(${{ env.JOB_START}} + "%s")
-          echo END= $(${{ env.JOB_END}} + "%s")
+          echo START= (${{ env.JOB_START}} + "%s")
+          echo END= (${{ env.JOB_END}} + "%s")
           echo "Время: $(( $END - $START ))"
 
       - name: Send mail
