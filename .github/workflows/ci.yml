@@ -103,8 +103,8 @@ jobs:
           JOB_START: $(curl https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq ".created_at")
           JOB_END: $(curl https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq ".updated_at")
         run: |
-          echo START= $( date --data = ${{ env.JOB_START }} +"%s" )
-          echo END= $( date --data = ${{ env.JOB_END }} +"%s" )
+          echo START= $( date --date = ${{ env.JOB_START }} +"%s" )
+          echo END= $( date --date = ${{ env.JOB_END }} +"%s" )
           
           echo TIME= $(END) - $(START)
 
