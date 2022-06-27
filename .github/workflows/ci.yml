@@ -4,7 +4,12 @@ env:
   PACK_NAME: "Ang-deploy-ver-${{ github.sha }}"
   REGISTRY: ghcr.io
   IMAGE_NAME: "${{ github.repository }}"
-  JOB_START: curl https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq ".created_at"
+  #JOB_START: curl https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq ".created_at"
+  JOB_START: |
+      $(gh api \ 
+        -H "Accept: application/vnd.github.v3+json" \
+        /repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq ".updated_at")
+  
   JOB_END: $(curl https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq ".updated_at")
 on:
   push:
