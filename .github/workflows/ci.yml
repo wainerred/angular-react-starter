@@ -101,7 +101,7 @@ jobs:
           subject: Github Actions job result
           to: wainerred@gmail.com
           from: wainer_actions
-          body: Build job of ${{ env.IMAGE_NAME }} completed - ${{ steps.check.outputs.status }}! Elapsed time from  "${{ env.JOB_START }}" to "${{ env.JOB_END }}".
+          body: Build job of ${{ env.IMAGE_NAME }} completed - ${{ steps.check.outputs.status }}! Elapsed time from . ${{ env.JOB_START }} , ${{ env.JOB_END }}
           
           
 #Попытки сделат расчеты времени, затраченного на jobs(вычесть из "updated_at" - "created_at"), венчались крахом (date: invalid date ‘"2022-06-27T18:49:54Z"’). 
