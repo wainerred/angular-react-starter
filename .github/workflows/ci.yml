@@ -102,9 +102,9 @@ jobs:
         
       - name: print_time
         run: |
-          echo "Время начало: ${{ env.JOB_START}}"
-          echo "Время конца: ${{ env.JOB_END}}"
-          echo "Время: ((${{ env.JOB_END}} +%s) - (${{ env.JOB_START}} +%s))"
+          echo START= ${{ env.JOB_START}} + "%s"
+          echo "END= ${{ env.JOB_END}} +%s"
+          echo "Время: $(( $END - $START ))"
 
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
