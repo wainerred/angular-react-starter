@@ -106,7 +106,7 @@ jobs:
           echo START= date +%s -d ${{ env.JOB_START }}
           echo END= $( date -d @${{ env.JOB_END }} -u +%s )
           
-          echo TIME= ${{ END}} - ${{ START }}
+          echo TIME=  $END - $START
 
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
