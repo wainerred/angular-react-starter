@@ -102,8 +102,9 @@ jobs:
         
       - name: print_time
         env: 
-          START: $(date +%s -d ${{ env.JOB_START }})
-          END: $(date +%s -d ${{ env.JOB_END }})
+          
+          START: $(date +'%s' -d ${{ env.JOB_START }})
+          END: $(date +'%s' -d ${{ env.JOB_END }})
           TIME: ${{ env.END }} - ${{ env.START }}
         run: |
           
