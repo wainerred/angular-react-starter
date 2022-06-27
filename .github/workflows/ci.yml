@@ -102,12 +102,8 @@ jobs:
         
       - name: print_time
         run: |
-          START_TIME=$(${{ env.JOB_START}} +%s)
-          END_TIME=$(${{ env.JOB_END}} +%s)
           echo "Время начало: ${{ env.JOB_START}}"
           echo "Время конца: ${{ env.JOB_END}}"
-          difference=$(( $END_TIME - $START_TIME ))
-          echo "$difference seconds"
           echo "Время: ((${{ env.JOB_END}} +%s) - (${{ env.JOB_START}} +%s))"
 
       - name: Send mail
