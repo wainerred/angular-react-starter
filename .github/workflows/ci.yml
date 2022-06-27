@@ -101,13 +101,13 @@ jobs:
         id: check
         
       - name: print_time
+        env: 
+          START: date +%s -d ${{ env.JOB_START }}
+          END: date +%s -d ${{ env.JOB_END }}
+          TIME: ${{ env.END }} - ${{ env.START }}
         run: |
-          echo "Начало: ${{ env.JOB_START }}"
-          date +%s -d ${{ env.JOB_START }}
-          date +%s -d ${{ env.JOB_END }}
-          echo END= $( date -d @${{ env.JOB_END }} -u +%s )
           
-          echo TIME=  $END - $START
+          echo ${{ env.TIME }}
 
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
