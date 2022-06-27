@@ -104,7 +104,7 @@ jobs:
           JOB_END: $(curl https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq ".updated_at")
         run: |
           echo START= ($JOB_START +%s)
-          echo END= ($JOB_END +%s_
+          echo END= ($JOB_END +%s)
           echo "Время: $( $END - $START )"
 
       - name: Send mail
