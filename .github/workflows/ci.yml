@@ -89,7 +89,7 @@ jobs:
 
       - name: test_time  
         run: |
-          END = "echo  ${{ env.JOB_END }}"
+          END = echo  ${{ env.JOB_END }}
           
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
