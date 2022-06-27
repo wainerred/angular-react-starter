@@ -4,8 +4,6 @@ env:
   PACK_NAME: "Ang-deploy-ver-${{ github.sha }}"
   REGISTRY: ghcr.io
   IMAGE_NAME: "${{ github.repository }}"
-  JOB_START: $(curl https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq ".created_at")
-  JOB_END: $(curl https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq ".updated_at")
 on:
   push:
     branches: "master" 
@@ -101,10 +99,13 @@ jobs:
         id: check
         
       - name: print_time
+        env: 
+          JOB_START: $(curl https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq ".created_at")
+          JOB_END: $(curl https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq ".updated_at")
         run: |
-          echo START= ${{ env.JOB_START }}
-          echo END= ${{ env.JOB_END }}
-          echo "Время: $(( ${END} - ${START} ))"
+          echo START= ($JOB_START +%s)
+          echo END= ($JOB_END +%s_
+          echo "Время: $( $END - $START )"
 
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
