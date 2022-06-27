@@ -103,12 +103,10 @@ jobs:
           JOB_START: $(curl https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq ".created_at")
           JOB_END: $(curl https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq ".updated_at")
         run: |
-          echo START= ${{ env.JOB_START }}
-          echo START1= $( date --date="2022-06-27T11:51:49Z" +%s )
-          echo END= ${{ env.JOB_END }}
-          echo END1= $( date --date="2022-06-27T11:52:52Z" +%s )
+          echo START= $( date --date=${{ env.JOB_START }} +%s )
+          echo END= $( date --date="${{ env.JOB_END }}" +%s )
           
-          echo TIME= $(END1) - $(START1)
+          echo TIME= $(END) - $(START)
 
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
