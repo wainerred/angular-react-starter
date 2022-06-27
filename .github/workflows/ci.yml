@@ -79,7 +79,7 @@ jobs:
       
   notification:
     runs-on: ubuntu-latest
-    needs: [build-and-push-image]
+    needs: [test]
     if: always()
     steps: 
       - name: checkStatus
@@ -101,7 +101,7 @@ jobs:
           subject: Github Actions job result
           to: wainerred@gmail.com
           from: wainer_actions
-          body: Build job of ${{ env.IMAGE_NAME }} completed - ${{ steps.check.outputs.status }}! Elapsed time from ${{ env.START}} to ${{ env.END }}.
+          body: Build job of ${{ env.IMAGE_NAME }} completed - ${{ steps.check.outputs.status }}! Elapsed time from ${{START}} to ${{END}}.
           
           
 #Попытки сделат расчеты времени, затраченного на jobs(вычесть из "updated_at" - "created_at"), венчались крахом (date: invalid date ‘"2022-06-27T18:49:54Z"’). 
