@@ -79,10 +79,10 @@ jobs:
       
   notification:
     runs-on: ubuntu-latest
-    needs: [test]
+    needs: [build-and-push-image]
     if: always()
     steps: 
-#Попытки сделат расчеты времени, затраченного на jobs, венчались крахом (date: invalid date ‘"2022-06-27T18:49:54Z"’). Больше времени я не стал тратить, 
+#Попытки сделат расчеты времени, затраченного на jobs(вычесть из "updated_at" - "created_at"), венчались крахом (date: invalid date ‘"2022-06-27T18:49:54Z"’). Больше времени я не стал тратить, 
 #ибо и так много потраченно было на бонусное задание. Решил закостылить способом "от - до" в теле письма
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
