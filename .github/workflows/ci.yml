@@ -104,11 +104,11 @@ jobs:
           JOB_END: $(curl https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq ".updated_at")
         run: |
           echo START= ${{ env.JOB_START }}
-          echo START1= $( date --date=$(START) +%s )
+          echo START1= $( date --date='2022-06-27T11:51:49Z' +%s )
           echo END= ${{ env.JOB_END }}
-          echo END1= $( date --date=END  +%s )
+          echo END1= $( date --date='2022-06-27T11:52:52Z' +%s )
           
-          echo TIME= $(END) - $START
+          echo TIME= $END1 - $START1
 
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
