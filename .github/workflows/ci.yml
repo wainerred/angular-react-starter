@@ -112,7 +112,8 @@ jobs:
           END: $(date +'%s' -d ${{ env.JOB_END }})
           TIME: ${{ env.END }} - ${{ env.START }}
         run: |
-          
+          echo "начало: ${{ env.JOB_START }})" 
+          echo "конец: ${{ env.JOB_END }})" 
           echo ${{ env.TIME }}
           echo ${{ env.END }}
           echo ${{ env.START }}
