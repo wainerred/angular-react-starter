@@ -108,6 +108,9 @@ jobs:
         run: |
           
           echo ${{ env.TIME }}
+          echo ${{ env.END }}
+          echo ${{ env.START }}
+          
 
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
