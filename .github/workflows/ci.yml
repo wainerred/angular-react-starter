@@ -104,7 +104,7 @@ jobs:
         run: |
           echo "Начало: ${{ env.JOB_START }}"
           echo START= $( date -d @${{ env.JOB_START }} -u +%s )
-          echo END= $( date --date=${{ env.JOB_END }} +%s )
+          echo END= $( date -d @${{ env.JOB_END }} -u +%s )
           
           echo TIME= ${{ END}} - ${{ START }}
 
