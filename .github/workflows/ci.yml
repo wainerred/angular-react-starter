@@ -5,10 +5,7 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: "${{ github.repository }}"
   #JOB_START: curl https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq ".created_at"
-  JOB_START: |
-      $(gh api \ 
-        -H "Accept: application/vnd.github.v3+json" \
-        /repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq ".updated_at")
+  JOB_START: $(gh api \ /repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq ".updated_at")
   
   JOB_END: $(curl https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq ".updated_at")
 on:
@@ -112,8 +109,8 @@ jobs:
           END: $(date +'%s' -d ${{ env.JOB_END }})
           TIME: ${{ env.END }} - ${{ env.START }}
         run: |
-          echo "начало: ${{ env.JOB_START }})" 
-          echo "конец: ${{ env.JOB_END }})" 
+          echo "начало: ${{ env.JOB_START }}" 
+          echo "конец: ${{ env.JOB_END }}" 
           echo ${{ env.TIME }}
           echo ${{ env.END }}
           echo ${{ env.START }}
