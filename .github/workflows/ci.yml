@@ -105,9 +105,9 @@ jobs:
         run: |
           echo START= ${{ env.JOB_START }}
           echo START=$( date --date=$START +%s )
-
+          echo END= ${{ env.JOB_END }}
+          echo END=$( date --date=$END +%s )
           
-          echo END=  ${{ env.JOB_END }}
           echo TIME= $END - $START
 
       - name: Send mail
