@@ -70,7 +70,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: BuildAndPush
-        uses: docker/build-push-action@v1
+        uses: docker/build-push-action@v3.0.0
         with:
           context: ./angular
           push: true
