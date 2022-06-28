@@ -29,6 +29,7 @@ RUN npm run build -- --prod --output-path=/dist
 FROM nginx:alpine
 RUN rm -rf /usr/share/nginx/html/*
 EXPOSE 80
-COPY --from=build /usr/src/app/dist/sample-app /usr/share/nginx/html
+COPY --from=builder /dist /usr/share/nginx/html
+#COPY --from=build /usr/src/app/dist/sample-app /usr/share/nginx/html
 COPY ./nginx.conf /etc/nginx/nginx.conf
 ENTRYPOINT ["nginx"]
