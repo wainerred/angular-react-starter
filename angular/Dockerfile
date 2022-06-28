@@ -6,6 +6,7 @@
 #RUN npm ci
 #COPY . .
 #RUN npm run build -- --prod --output-path=/dist
+
 #nginx
 #FROM nginx:alpine
 #RUN rm -rf /usr/share/nginx/html/*
@@ -16,6 +17,7 @@
 
 
 #node
+FROM node:alpine as builder
 WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 RUN npm install
