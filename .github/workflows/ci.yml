@@ -57,7 +57,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: LogInPackage
-        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        uses: docker/login-action@v1
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -65,12 +65,12 @@ jobs:
 
       - name: Meta
         id: meta
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        uses: docker/metadata-action@v1
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: BuildAndPush
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        uses: docker/build-push-action@v1
         with:
           context: ./angular
           push: true
@@ -99,7 +99,7 @@ jobs:
           subject: Github Actions job result
           to: wainerred@gmail.com
           from: wainer_actions
-          body: Build job of ${{ env.IMAGE_NAME }} completed - ${{ steps.check.outputs.status }}! ${{env.START}}
+          body: Build job of ${{ env.IMAGE_NAME }} completed - ${{ steps.check.outputs.status }}!
           
           
 #Попытки сделат расчеты времени, затраченного на jobs(вычесть из "updated_at" - "created_at"), венчались крахом (date: invalid date ‘"2022-06-27T18:49:54Z"’). 
