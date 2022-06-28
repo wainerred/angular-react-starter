@@ -22,10 +22,12 @@ WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
-RUN npm run build
+RUN npm run build -- --prod --output-path=/dist
+#RUN npm run build
 
 #nginx
 FROM nginx:alpine
+RUN rm -rf /usr/share/nginx/html/*
 EXPOSE 80
 COPY --from=build /usr/src/app/dist/sample-app /usr/share/nginx/html
 COPY ./nginx.conf /etc/nginx/nginx.conf
